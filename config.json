@@ -1,0 +1,9 @@
+{
+    "verifyCode": "6738",
+    "rpcToken": "",
+    "rpcPort": "16800",
+    "saveDiskPath": "/home/clboy/Desktop/down",
+    "chromeExecPath": "/usr/bin/google-chrome-stable",
+    "motrixExecPath": "/opt/Motrix/motrixdsds",
+    "useMotrix": false
+}

@@ -2,8 +2,12 @@
     "verifyCode": "6738",
     "rpcToken": "",
     "rpcPort": "16800",
-    "saveDiskPath": "/home/clboy/Desktop/down",
-    "chromeExecPath": "/usr/bin/google-chrome-stable",
+    "useMotrix": false,
     "motrixExecPath": "/opt/Motrix/motrixdsds",
-    "useMotrix": false
+    "saveDiskPath": "",
+    "chromeExecPath": "",
+    "defaultChromeExecPath": {
+        "linux": "/usr/bin/google-chrome-stable",
+        "windows": "\"C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe\""
+    }
 }

@@ -12,12 +12,12 @@ async function install(browser, greasyforkUrl) {
     await page.bringToFront();
     await installBtn.click();
     return new Promise((resolve, reject) => {
+        console.log("等待脚本安装完成(如果等待时间过长，请关闭程序重新运行)......");
         let waitForFinished = false;
         let waitForId = setInterval(async () => {
             let targets = await browser.targets();
             let confirmTarget = await targets.find(item => /chrome-extension:\/\/.*\/ask.html/.test(item.url()));
             if (waitForFinished || !confirmTarget) {
-                console.log("如等待时间过长，请关闭程序重新运行");
                 return;
             }
             waitForFinished = true;
@@ -25,7 +25,7 @@ async function install(browser, greasyforkUrl) {
             let confirmPage = await confirmTarget.page();
             let confirmBtn = await confirmPage.waitForSelector('.ask_action_buttons input:nth-child(1)', { timeout: 5000 });
             await confirmBtn.click();
-            console.log("============================= 安装脚本完成 =============================");
+            console.log("✓ 安装脚本完成");
             page.close();
             resolve();
         }, 2000);

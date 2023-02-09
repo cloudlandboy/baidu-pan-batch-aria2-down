@@ -15,7 +15,7 @@ const runApp = require('./runApp');
 const config = require('./config.json');
 const extension = require('./extension');
 const querystring = require("querystring");
-//const open_browser = require('./open-connect-browser');
+// const open_browser = require('./open-connect-browser');
 const open_browser = require('./open-embedded-browser');
 
 
@@ -36,8 +36,10 @@ if (targetPathList.length < 1) {
 
 //目前只支持单个链接
 const targetPath = targetPathList[0];
+const saveDiskPath = initSaveDiskPath(config, targetPath);
 
 const downComplete = [];
+
 
 (async function () {
     console.log('ps:启动过程中如果报错，可退出后重新运行多尝试几次');
@@ -87,7 +89,6 @@ async function actionDownloadFile(page, fileItem, folder) {
     await page.bringToFront();
     return true;
 }
-
 
 /**
  * @description: 处理文件夹
@@ -159,14 +160,14 @@ async function ensureLogined(page) {
     let stoken = cookies.find(item => item.name.toLocaleUpperCase() == 'BDUSS_BFESS');
     if (!stoken) {
         await page.goto('https://pan.baidu.com');
-        console.log("======================= 您还未登录网盘，程序将会等待你登录后继续执行 ========================");
+        console.log("未登录，程序将会在你登录后继续执行 ......");
         await page.waitForTimeout(5000);
         while (!stoken) {
             cookies = await page.cookies('https://.baidu.com');
             stoken = cookies.find(item => item.name.toLocaleUpperCase() == 'BDUSS_BFESS');
         }
         await page.reload();
-        console.log("======================= 登录完成 ========================");
+        console.log("✓ 登录成功");
     }
 }
 
@@ -187,12 +188,12 @@ async function run(browser, page) {
                 }
                 console.log("============================= 所有文件已添加到下载队列，请等待下载完成再退出 =============================");
                 console.log("============================= 退出：ctrl+c =============================");
-                open_browser.close();
+                open_browser.close(browser);
                 return;
             }
         }
-        console.log("\n\n============================= 网盘文件不存在，退出：ctrl+c =============================");
-        open_browser.close();
+        console.log(`\n\n============================= ${targetPath} 不存在网盘中，退出：ctrl+c =============================`);
+        open_browser.close(browser);
     } catch (error) {
         // 重头开始重试
         console.error(error);
@@ -201,4 +202,18 @@ async function run(browser, page) {
         await page.reload();
         await run(browser, page);
     }
+}
+
+function initSaveDiskPath(config, targetPath) {
+    if (config.saveDiskPath) {
+        return config.saveDiskPath;
+    }
+    let dirname = path.basename(targetPath);
+    let dotIndex = dirname.indexOf('.');
+    if (dotIndex >= 0) {
+        dirname = dirname.substring(0, dotIndex)
+    }
+    let saveDiskPath = path.join(__dirname, 'downloads', dirname)
+    console.log(`文件将下载至目录：${saveDiskPath}`);
+    return saveDiskPath;
 }

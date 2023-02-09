@@ -18,6 +18,7 @@
  */
 
 
+const fs = require('fs');
 const path = require('path');
 const puppeteer = require('puppeteer')
 const greasyfork = require('./greasyfork');
@@ -28,12 +29,16 @@ async function open(config) {
     console.log();
     console.log("                             1.已正确填写配置文件");
     console.log();
-    console.log("================================================================================");
+    console.log("=================================================================================");
+    let args = ['--start-maximized', '--no-default-browser-check', '--disable-infobars'];
+    let userDataDir = path.join(__dirname, 'browser-data');
+    args.push('--load-extension=' + path.join(__dirname, "program/tampermonkey_stable"));
     const browser = await puppeteer.launch({
+        args,
+        userDataDir,
         headless: false,
         defaultViewport: null,
         ignoreDefaultArgs: ['--disable-extensions', '--enable-automation'],
-        args: ['--start-maximized', '--no-default-browser-check', '--load-extension=' + path.join(__dirname, "program/tampermonkey_stable")]
     })
     return browser;
 }

@@ -15,6 +15,9 @@ const child_process = require('child_process');
 
 
 async function runApp(execPath, param, ensureSingle, findPidNameList) {
+    if (!execPath || execPath.trim().length < 1) {
+        throw new Error('空的执行程序路径：' + execPath);
+    }
     if (path.isAbsolute(execPath)) {
         execPath = getRealPath(execPath);
     }

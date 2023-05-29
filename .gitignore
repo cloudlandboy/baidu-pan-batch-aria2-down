@@ -71,3 +71,4 @@ fabric.properties
 .idea/
 program/
 browser-data/
+config.json

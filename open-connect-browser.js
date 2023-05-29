@@ -10,7 +10,7 @@
 const os = require('os');
 const axios = require('axios');
 const runApp = require('./runApp');
-const extension = require('./extension');
+const extension = require('./418182-extension');
 const puppeteer = require('puppeteer-core');
 
 async function open(config) {

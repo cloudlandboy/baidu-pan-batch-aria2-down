@@ -13,10 +13,10 @@ const path = require('path');
 const aria2 = require('./aria2');
 const runApp = require('./runApp');
 const config = require('./config.json');
-const extension = require('./extension');
+const extension = require('./418182-extension');
 const querystring = require("querystring");
-// const open_browser = require('./open-connect-browser');
-const open_browser = require('./open-embedded-browser');
+const open_browser = require('./open-connect-browser');
+//const open_browser = require('./open-embedded-browser');
 
 
 const targetPathText = fs.readFileSync(path.join(__dirname, 'link.txt'), { encoding: 'utf-8' })
@@ -83,7 +83,7 @@ async function actionDownloadFile(page, fileItem, folder) {
     await page.waitForSelector(fileCheckboxSelector, { timeout: 10000 });
     await page.click(fileCheckboxSelector);
     await page.waitForTimeout(1000);
-    await extension.selectFileAfter(page, config, path.join(config.saveDiskPath, folder));
+    await extension.selectFileAfter(page, config, path.join(saveDiskPath, folder));
     downComplete.push(fileItem.path);
     await aria2.eachAfter();
     await page.bringToFront();
@@ -205,15 +205,18 @@ async function run(browser, page) {
 }
 
 function initSaveDiskPath(config, targetPath) {
+    let saveDiskPath;
     if (config.saveDiskPath) {
-        return config.saveDiskPath;
+        saveDiskPath = config.saveDiskPath;
+    } else {
+        let dirname = path.basename(targetPath);
+        let dotIndex = dirname.indexOf('.');
+        if (dotIndex >= 0) {
+            dirname = dirname.substring(0, dotIndex)
+        }
+        saveDiskPath = path.join(__dirname, 'downloads', dirname)
     }
-    let dirname = path.basename(targetPath);
-    let dotIndex = dirname.indexOf('.');
-    if (dotIndex >= 0) {
-        dirname = dirname.substring(0, dotIndex)
-    }
-    let saveDiskPath = path.join(__dirname, 'downloads', dirname)
+
     console.log(`文件将下载至目录：${saveDiskPath}`);
     return saveDiskPath;
 }

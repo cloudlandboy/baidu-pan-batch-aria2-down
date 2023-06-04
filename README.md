@@ -2,7 +2,7 @@
 
 
 
-## 说明
+## 声明
 
 **该程序只是一个自动化脚本，直链解析的工作是由油猴脚本完成的**
 
@@ -10,9 +10,13 @@
 
 *验证码需要自己去关注油猴脚本的作者公众号获取*
 
-**下载Releases中完整压缩包解压运行**
 
-使用指定浏览器(需要自己去安装好油猴脚本)+motrix 直接clone代码就能跑起来
+
+## 安装
+
+**open-embedded-browser模式需要下载Releases中完整压缩包解压后** [运行](#运行)
+
+open-connect-browser模式无需下载完整压缩包
 
 
 
@@ -24,7 +28,7 @@
 
 
 
-## 配置
+## 配置说明
 
 ```json
 {
@@ -53,20 +57,35 @@
 
 - `useMotrix` ：使用motrix软件
 
-- `motrixExecPath` ：useMotrix为true时需要指定motrix执行程序所在路径
+- `motrixExecPath` ：useMotrix为true时，需要指定motrix执行程序所在路径
 
-- `chromeExecPath` ：谷歌浏览器执行程序路径
+- `chromeExecPath` ：谷歌浏览器执行程序路径（open-connect-browser模式有效）
 
+  无特殊情况不需要填写，会根据当前系统取下面 `defaultChromeExecPath` 中的默认值
   
   
-  无特殊情况不需要填写会根据当前系统取下面 `defaultChromeExecPath` 中的默认值
-  
-  使用内置浏览器也不需要填写。可修改 `main.js` 代码改为自己的浏览器
-  
-  ```javascript
-  const open_browser = require('./open-connect-browser');
-  //const open_browser = require('./open-embedded-browser');
-  ```
+
+## open-connect-browser模式
+
+使用自己安装的谷歌浏览器(需要手动早浏览器中安装好油猴插件和脚本)，需要修改 `main.js` 代码
+
+```javascript
+const open_browser = require('./open-connect-browser');
+//const open_browser = require('./open-embedded-browser');
+```
+
+
+
+## open-embedded-browser模式
+
+内置浏览器(完全自动化，无需手动安装油猴插件和脚本)，需要修改 `main.js` 代码
+
+```javascript
+// const open_browser = require('./open-connect-browser');
+const open_browser = require('./open-embedded-browser');
+```
+
+
 
 
 
@@ -77,12 +96,11 @@
 2. 进入目录安装依赖
 
    ```shell
-   # 如果使用自己的浏览器，安装时可添加--production参数避免下载Chromium： cnpm install --production
-   # npm install
-   cnpm install
+   # 如果使用open-connect-browser模式，安装时可添加--production参数来避免下载Chromium： npm install --production
+   npm install
    ```
 
-3. 正确填写config.json
+3. 正确填写config.json中的配置
 
 4. 将网盘目录页url或文件路径复制到 link.txt 文件中
 

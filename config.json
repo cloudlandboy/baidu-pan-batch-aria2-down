@@ -1,0 +1,13 @@
+{
+    "verifyCode": "4577",
+    "rpcToken": "",
+    "rpcPort": "16800",
+    "useMotrix": false,
+    "motrixExecPath": "/opt/Motrix/motrix",
+    "saveDiskPath": "",
+    "chromeExecPath": "",
+    "defaultChromeExecPath": {
+        "linux": "/usr/bin/google-chrome-stable",
+        "windows": "\"C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe\""
+    }
+}

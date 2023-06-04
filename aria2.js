@@ -37,9 +37,11 @@ async function startRpcServer(config, browser) {
     while (!connectionSuccess) {
         await page.goto("file:///" + path.join(__dirname, 'program/aria2-webui/index.html'))
         console.log("等待连接rpc服务......");
-        await page.bringToFront();
         await page.waitForTimeout(3000);
-        let settingMenu = await page.waitForSelector('div.navbar-collapse>ul:nth-child(2) a.dropdown-toggle');
+        await page.bringToFront();
+        let settingMenu = await page.waitForSelector('div.navbar-collapse>ul:nth-child(2) a.dropdown-toggle',{
+            timeout: 2000
+        });
         await settingMenu.click()
         await page.click('a[ng-click="changeCSettings()"]');
         let portInput = await page.waitForSelector('input[ng-model="connection.conf.port"]');

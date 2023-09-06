@@ -1,9 +1,9 @@
 {
-    "verifyCode": "4577",
+    "verifyCode": "4849",
     "rpcToken": "",
     "rpcPort": "16800",
-    "useMotrix": false,
-    "motrixExecPath": "/opt/Motrix/motrix",
+    "useMotrix": true,
+    "motrixExecPath": "D:\\Motrix\\Motrix.exe",
     "saveDiskPath": "",
     "chromeExecPath": "",
     "defaultChromeExecPath": {

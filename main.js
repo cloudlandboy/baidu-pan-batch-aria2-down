@@ -15,8 +15,8 @@ const runApp = require('./runApp');
 const config = require('./config.json');
 const extension = require('./extension');
 const querystring = require("querystring");
-// const open_browser = require('./open-connect-browser');
-const open_browser = require('./open-embedded-browser');
+const open_browser = require('./open-connect-browser');
+//const open_browser = require('./open-embedded-browser');
 
 
 const targetPathText = fs.readFileSync(path.join(__dirname, 'link.txt'), { encoding: 'utf-8' })

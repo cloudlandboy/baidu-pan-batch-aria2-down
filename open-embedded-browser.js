@@ -48,7 +48,7 @@ async function close(browser) {
 }
 
 async function createPageAfter(browser, page, config) {
-    await greasyfork.install(browser, 'https://greasyfork.org/scripts/418182');
+    await greasyfork.install(browser, 'https://greasyfork.org/scripts/463171');
     // 关闭油猴扩展的提示页
     let tampermonkeyHome = await browser.targets().find(item => item.url().startsWith('https://www.tampermonkey.net'))
     let tampermonkeyHomePage = await tampermonkeyHome.page()

@@ -3,7 +3,7 @@
  * @Date: 2023-02-01 10:27:54
  * @LastEditors: clboy
  * @LastEditTime: 2023-02-02 13:46:24
- * @Description: 触发油猴插件下载逻辑，插件为百度网盘简易下载助手（直链下载复活版），地址：https://greasyfork.org/scripts/418182
+ * @Description: 触发油猴插件下载逻辑，插件为百度网盘简易下载助手（直链下载复活版），地址：https://greasyfork.org/scripts/463171
  * 
  * 适配其他插件，更改scriptUrl值为插件地址，重写selectFileAfter方法
  * 
@@ -11,7 +11,7 @@
  */
 
 // 插件主页地址
-const scriptUrl = 'https://greasyfork.org/scripts/418182';
+const scriptUrl = 'https://greasyfork.org/scripts/463171';
 
 
 const process = require('process');

@@ -11,6 +11,7 @@ const fs = require('fs');
 const _path = require('path');
 const axios = require('axios');
 const prompts = require('prompts');
+const { exit } = require('process');
 
 const axiosInstance = axios.create({
     baseURL: 'https://www.94speed.com/api.php',
@@ -125,6 +126,9 @@ async function downloadDirectoryFile(path, share) {
                         header: [`User-Agent:${downRes.data.data.user_agent}`]
                     }
                 ]
+            }).catch(err => {
+                console.log('connect motrix failed');
+                exit()
             });
         })
     }

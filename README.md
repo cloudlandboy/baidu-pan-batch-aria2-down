@@ -2,6 +2,18 @@
 
 
 
+## 备用
+
+https://www.94speed.com/
+
+自己写的nodeJs命令行版本 ( **会将分享链接里的所有文件都下载下来** )：
+
+```shell
+node 94speed.js
+```
+
+
+
 ## 声明
 
 **该程序只是一个自动化脚本，直链解析的工作是由油猴脚本完成的**
@@ -84,8 +96,6 @@ const open_browser = require('./open-connect-browser');
 // const open_browser = require('./open-connect-browser');
 const open_browser = require('./open-embedded-browser');
 ```
-
-
 
 
 
